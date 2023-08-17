@@ -22,17 +22,18 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const posts = await blogItem.find();
-        res.json(posts);
         //for listing of all blog posts in cards:
-/*         let postArr = []
+        let postArr = []
         posts.forEach((post) => {
             postArr.push({
+                id: post.id,
                 title: post.title,
+                content: post.content,
                 shortDesc: post.shortDesc,
                 date: post.dateEntered
             })
         })
-        res.json(postArr) */
+        res.json(postArr);
     } catch (e) {
         res.status(500).json({ message: e.message });
     }
@@ -40,7 +41,7 @@ router.get('/', async (req, res) => {
 
 //read one
 router.get('/:id', getBlog, (req, res) => {
-    res.send(res.selectedBlog.title)
+    res.json(res.selectedBlog);
 });
 
 //update one
@@ -58,12 +59,12 @@ async function getBlog(req, res, next) {
     try {
         blog = await blogItem.findById(req.params.id)
         if (blog == null) {
-            return res.status(404).json({ message: "Cannot find subscriber try" });
-          }
+            return res.status(404).json({ message: "Cannot find subscriber" });
+        }
     } catch (e) {
         if (blog == undefined) {
-            return res.status(404).json({ message: "Cannot find subscriber catch" });
-          }
+            return res.status(404).json({ message: "Cannot find subscriber" });
+        }
         return res.status(500).json({ message: e.message });
     }
     res.selectedBlog = blog;
