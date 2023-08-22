@@ -2,7 +2,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from "express";
 import mongoose from 'mongoose';
-import blogPosts from './routes/blogPosts.js';
+import blogPostsRead from './routes/blogPostsRead.js';
+import blogPostChange from './routes/blogPostChange.js';
+
 
 const app = express();
 const port = process.env.PORT || 8081;
@@ -18,7 +20,9 @@ db.once('open', () => console.log('Connected to Database'))
 
 app.use(express.json());
 
-app.use('/blogPosts', blogPosts);
+app.use('/blogPosts', blogPostsRead);
+
+app.use('/blogChange', blogPostChange);
 
 app.listen(port, () => {
     console.log("Server listening on port", port);
