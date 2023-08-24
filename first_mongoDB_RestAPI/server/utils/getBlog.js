@@ -1,6 +1,6 @@
 import blogItem from '../models/blogPost.js';
 
-export async function getBlog(req, res, next) {
+export async function getBlogById(req, res, next) {
     let blog;
     try {
         blog = await blogItem.findById(req.params.id);

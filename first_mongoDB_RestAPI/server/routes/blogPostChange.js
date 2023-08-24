@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import blogItem from '../models/blogPost.js';
-import { getBlog } from '../utils/getBlog.js';
+import { getBlogById } from '../utils/getBlog.js';
 
 //create one
 router.post('/', async (req, res) => {
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
 });
 
 //update one
-router.patch('/:id', getBlog, async (req, res) => {
+router.patch('/:id', getBlogById, async (req, res) => {
     if (req.body) {
         if (req.body.title != null) {
             res.selectedBlog.title = req.body.title
@@ -51,7 +51,7 @@ router.patch('/:id', getBlog, async (req, res) => {
 });
 
 //delete one
-router.post('/:id', getBlog, async (req, res) => {
+router.post('/:id', getBlogById, async (req, res) => {
     try {
         await res.selectedBlog.deleteOne();
         res.json({ message: "Post deleted." });

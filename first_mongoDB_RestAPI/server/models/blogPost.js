@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
         required: true
     },
     content: {
-        type: Object,
+        type: Object,  //Only ever 2 deep 
         required: true
     },
     shortDesc: {

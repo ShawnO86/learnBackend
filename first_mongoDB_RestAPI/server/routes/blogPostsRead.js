@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import blogItem from '../models/blogPost.js';
-import { getBlog } from '../utils/getBlog.js';
+import { getBlogById } from '../utils/getBlog.js';
 
 //read all
 router.get('/', async (req, res) => {
@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 });
 
 //read one
-router.get('/:id', getBlog, (req, res) => {
+router.get('/:id', getBlogById, (req, res) => {
     res.json(res.selectedBlog);
 });
 
