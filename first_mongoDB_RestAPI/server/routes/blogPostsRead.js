@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
         posts.forEach((post) => {
             postArr.push({
                 id: post.id,
+                postType: post.postType,
                 title: post.title,
                 content: post.content,
                 shortDesc: post.shortDesc,
